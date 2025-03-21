@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 const Navbar = () => {
   return (
-    <nav className="bg-blue-500 text-white p-4 shadow-md">
+    <nav className="bg-blue-500 text-white px-20 py-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         <h1 className="text-2xl font-bold">Logo Here</h1>
         <div className="space-x-6 hidden md:flex">

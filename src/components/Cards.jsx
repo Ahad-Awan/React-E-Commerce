@@ -1,10 +1,14 @@
 import React from "react";
+import Button from "./Button";
 
 const Cards = ({ products }) => {
   return (
     <div className="flex gap-10">
       {products.map((product) => (
-        <div className="bg-white p-4 rounded-xl shadow-lg max-w-sm border border-gray-200">
+        <div
+          key={product.id}
+          className="bg-white p-4 rounded-xl shadow-lg max-w-sm border border-gray-200"
+        >
           <img
             src={product.image}
             alt={product.name}
@@ -17,9 +21,7 @@ const Cards = ({ products }) => {
             {product.price}
           </p>
           <p className="text-gray-600 text-center mt-3">{product.desc}</p>
-          <button className="mt-5 w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-700">
-            Add to Cart
-          </button>
+          <Button text="Add to cart" className="hover:bg-blue-600" />
         </div>
       ))}
     </div>
