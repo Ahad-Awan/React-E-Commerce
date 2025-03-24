@@ -59,10 +59,10 @@ const Modal = ({ products, setProducts }) => {
   };
 
   return (
-    <div className="flex flex-col items-center flex-wrap justify-start  pt-6">
+    <div className="flex flex-col items-center flex-wrap justify-start">
       <Button
         text="Add Product"
-        className="px-20 mb-4 hover:bg-blue-600"
+        className="px-20 mb-6 hover:bg-blue-600"
         onClick={() => setIsOpen(true)}
       />
 
@@ -119,6 +119,7 @@ const Modal = ({ products, setProducts }) => {
               className="hover:bg-blue-600"
               onClick={handleOutput}
             />
+
             <Button
               text="Close"
               className="bg-red-500 hover:bg-red-600"

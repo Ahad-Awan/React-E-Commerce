@@ -16,7 +16,7 @@ const products = [
     image: shirtImg,
     name: "Blue Shirt",
     price: "$19.99",
-    desc: "A shirt is a garment worn on the upper body, typically having sleeves and a front opening, often with a collar and buttons or a zipper.",
+    desc: "A shirt is a garment worn on the upper body, typically having sleeves and a front opening.",
   },
   {
     image: shoeImg,

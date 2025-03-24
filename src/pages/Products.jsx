@@ -4,12 +4,12 @@ import Cards from "../components/Cards";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  console.log(products, "product component");
+  // console.log(products, "product component");
 
   return (
     <div>
       <Modal products={products} setProducts={setProducts} />
-      <Cards products={products} />
+      <Cards products={products} setProducts={setProducts} />
     </div>
   );
 };
