@@ -11,7 +11,7 @@ const Cards = ({ products, setProducts }) => {
   };
 
   return (
-    <div className="flex flex-wrap justify-center gap-10">
+    <div className="flex flex-wrap justify-center gap-6 ">
       {products.map((product, index) => (
         <div
           key={product.id}

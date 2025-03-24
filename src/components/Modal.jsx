@@ -69,9 +69,7 @@ const Modal = ({ products, setProducts }) => {
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h2 className="text-3xl text-center font-bold mb-6">
-              Add Product Data
-            </h2>
+            <h2 className="text-3xl text-center font-bold">Add Product Data</h2>
             <input
               type="text"
               name="title"

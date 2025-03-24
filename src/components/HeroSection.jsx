@@ -28,7 +28,7 @@ const products = [
 
 const Herosection = () => {
   return (
-    <div className="flex justify-center items-center gap-10 mt-6">
+    <div className="flex justify-center items-center gap-10 mt-6 min-h-screen">
       <Cards products={products} />
     </div>
   );

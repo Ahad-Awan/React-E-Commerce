@@ -7,7 +7,7 @@ const Products = () => {
   // console.log(products, "product component");
 
   return (
-    <div>
+    <div className="mt-4 mb-10">
       <Modal products={products} setProducts={setProducts} />
       <Cards products={products} setProducts={setProducts} />
     </div>
