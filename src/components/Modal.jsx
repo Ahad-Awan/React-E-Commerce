@@ -50,8 +50,11 @@ const Modal = ({ products, setProducts }) => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setData((prev) => ({ ...prev, image: imageUrl }));
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setData((prev) => ({ ...prev, image: reader.result }));
+      };
+      reader.readAsDataURL(file);
     }
   };
 
