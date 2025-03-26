@@ -24,7 +24,7 @@ const Modal = ({ products, setProducts }) => {
       id: Date.now(),
       title: data.title,
       price: data.price,
-      desc: data.desc,
+      desc: data.desc.slice(0, 100),
       image: data.image,
     };
 
