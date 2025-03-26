@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 
 const ViewCart = () => {
+  const navigate = useNavigate();
+
   const [cartItems, setCartItems] = useState(() => {
     const storedCart = JSON.parse(localStorage.getItem("storeCart")) || [];
     return storedCart.map((item) => ({
@@ -36,9 +39,13 @@ const ViewCart = () => {
   };
 
   const totalPrice = cartItems.reduce(
-    (acc, item) => acc + Number(item.price) * item.quantity,
+    (acc, item) => acc + Number(item.price || 0) * item.quantity,
     0
   );
+
+  const handleCheckout = () => {
+    navigate("/Checkout");
+  };
 
   return (
     <div className="min-h-screen p-6 bg-gray-100 flex flex-col items-center">
@@ -93,8 +100,11 @@ const ViewCart = () => {
 
         {cartItems.length > 0 && (
           <div className="mt-6 flex justify-between items-center">
-            <p className="text-xl font-bold">Total: ${totalPrice}</p>
-            <button className="bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600">
+            <p className="text-xl font-bold">Total: {totalPrice}</p>
+            <button
+              className="bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600"
+              onClick={handleCheckout}
+            >
               Checkout
             </button>
           </div>

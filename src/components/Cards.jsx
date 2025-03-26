@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Button from "./Button";
 
 const Cards = ({ products, setProducts }) => {
-  console.log("Product Props in Card", products);
+  // console.log("Product Props in Card", products);
 
   const [cart, setCart] = useState(
     JSON.parse(localStorage.getItem("storeCart")) || []
