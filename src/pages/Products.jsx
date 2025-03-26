@@ -3,7 +3,9 @@ import Modal from "../components/Modal";
 import Cards from "../components/Cards";
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(
+    JSON.parse(localStorage.getItem("storeProduct")) || []
+  );
   // console.log(products, "product component");
 
   return (

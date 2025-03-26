@@ -2,7 +2,7 @@ import React from "react";
 import Button from "../components/Button";
 
 const Home = () => {
-  const products = JSON.parse(localStorage.getItem("products")) || [];
+  const products = JSON.parse(localStorage.getItem("storeProduct")) || [];
   // console.log(products, "Home");
   return (
     <>

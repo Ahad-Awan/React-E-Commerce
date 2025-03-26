@@ -11,12 +11,7 @@ const Modal = ({ products, setProducts }) => {
   });
 
   useEffect(() => {
-    const storedProducts = JSON.parse(localStorage.getItem("products")) || [];
-    setProducts(storedProducts);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("products", JSON.stringify(products));
+    localStorage.setItem("storeProduct", JSON.stringify(products));
   }, [products]);
 
   const handleOutput = () => {
@@ -35,7 +30,6 @@ const Modal = ({ products, setProducts }) => {
 
     const updatedProducts = [...products, newProduct];
     setProducts(updatedProducts);
-    localStorage.setItem("products", JSON.stringify(updatedProducts));
 
     setData({
       title: "",
@@ -69,7 +63,9 @@ const Modal = ({ products, setProducts }) => {
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h2 className="text-3xl text-center font-bold">Add Product Data</h2>
+            <h2 className="text-3xl text-center font-bold mb-4">
+              Add Product Data
+            </h2>
             <input
               type="text"
               name="title"
@@ -113,7 +109,7 @@ const Modal = ({ products, setProducts }) => {
               />
             )}
             <Button
-              text="Add to Cart"
+              text="Add Product"
               className="hover:bg-blue-600"
               onClick={handleOutput}
             />
