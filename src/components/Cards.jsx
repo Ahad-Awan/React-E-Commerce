@@ -6,9 +6,17 @@ const Cards = ({ products, setProducts }) => {
     JSON.parse(localStorage.getItem("storeCart")) || []
   );
 
+  const [wishlist, setWishlist] = useState(
+    JSON.parse(localStorage.getItem("storeWishlist")) || []
+  );
+
   useEffect(() => {
     localStorage.setItem("storeCart", JSON.stringify(cart));
   }, [cart]);
+
+  useEffect(() => {
+    localStorage.setItem("storeWishlist", JSON.stringify(wishlist));
+  }, [wishlist]);
 
   const addProduct = (product) => {
     const existingProduct = cart.find((item) => item.id === product.id);
@@ -19,6 +27,17 @@ const Cards = ({ products, setProducts }) => {
       setCart(updatedCart);
     } else {
       setCart([...cart, { ...product, quantity: 1 }]);
+    }
+  };
+
+  const addToWishlist = (product) => {
+    const isAlreadyInWishlist = wishlist.some((item) => item.id === product.id);
+
+    if (isAlreadyInWishlist) {
+      alert("This item is already in your wishlist!");
+    } else {
+      setWishlist([...wishlist, product]);
+      alert("Item added to your wishlist!");
     }
   };
 
@@ -59,11 +78,12 @@ const Cards = ({ products, setProducts }) => {
             <Button
               text="Add to Wishlist"
               className="bg-red-500 hover:bg-red-600 font-medium py-2 px-4 w-1/2 rounded-lg transition duration-300"
+              onClick={() => addToWishlist(product)}
             />
             <Button
               onClick={() => removeProduct(index)}
               text="Remove"
-              className="bg-gray-500 hover:bg-gray-600 font-medium py-2 px-4 rounded-lg transition duration-300 "
+              className="bg-gray-500 hover:bg-gray-600 font-medium py-2 px-4 rounded-lg transition duration-300"
             />
           </div>
         </div>
