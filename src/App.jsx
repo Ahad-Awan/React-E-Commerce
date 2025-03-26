@@ -8,6 +8,7 @@ import Contact from "./pages/Contact";
 import Error from "./pages/Error";
 import ViewCart from "./pages/ViewCart";
 import Checkout from "./pages/Checkout";
+import Wishlist from "./pages/Wishlist";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/viewCart" element={<ViewCart />} />
+        <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="*" element={<Error />} />
       </Routes>

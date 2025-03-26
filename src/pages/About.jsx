@@ -1,6 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router";
 
 const AboutUs = () => {
+  const navigate = useNavigate();
+
+  const handleAbout = () => {
+    navigate("/");
+  };
+
   return (
     <div className="min-h-screen  py-10 px-6 lg:px-20">
       <div className="max-w-6xl mx-auto">
@@ -79,7 +86,8 @@ const AboutUs = () => {
             experience.
           </p>
           <a
-            href="/products"
+            // href="/products"
+            onClick={handleAbout}
             className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300"
           >
             Browse Products

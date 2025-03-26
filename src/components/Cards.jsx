@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import Button from "./Button";
 
 const Cards = ({ products, setProducts }) => {
-  // console.log("Product Props in Card", products);
-
   const [cart, setCart] = useState(
     JSON.parse(localStorage.getItem("storeCart")) || []
   );
@@ -13,19 +11,22 @@ const Cards = ({ products, setProducts }) => {
   }, [cart]);
 
   const addProduct = (product) => {
-    const isAlreadyInCart = cart.some((item) => item.id === product.id);
-    if (isAlreadyInCart) {
-      alert("Already in Cart");
+    const existingProduct = cart.find((item) => item.id === product.id);
+    if (existingProduct) {
+      const updatedCart = cart.map((item) =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+      setCart(updatedCart);
     } else {
-      setCart([...cart, product]);
+      setCart([...cart, { ...product, quantity: 1 }]);
     }
   };
 
   const removeProduct = (index) => {
-    const updatedCart = [...products];
-    updatedCart.splice(index, 1);
-    setProducts(updatedCart);
-    localStorage.setItem("storeProduct", JSON.stringify(updatedCart));
+    const updatedProducts = [...products];
+    updatedProducts.splice(index, 1);
+    setProducts(updatedProducts);
+    localStorage.setItem("storeProduct", JSON.stringify(updatedProducts));
   };
 
   return (
@@ -47,16 +48,24 @@ const Cards = ({ products, setProducts }) => {
             {product.price}
           </p>
           <p className="text-gray-600 text-center mt-2">{product.desc}</p>
+
           <Button
             text="Add to Cart"
-            className="bg-blue-500 hover:bg-blue-600"
+            className="bg-green-500 hover:bg-green-600 font-medium py-2 px-4 w-full rounded-lg transition duration-300 mt-3"
             onClick={() => addProduct(product)}
           />
-          <Button
-            onClick={() => removeProduct(index)}
-            text="Remove"
-            className="bg-red-500 hover:bg-red-600"
-          />
+
+          <div className="flex justify-between mt-2">
+            <Button
+              text="Add to Wishlist"
+              className="bg-red-500 hover:bg-red-600 font-medium py-2 px-4 w-1/2 rounded-lg transition duration-300"
+            />
+            <Button
+              onClick={() => removeProduct(index)}
+              text="Remove"
+              className="bg-gray-500 hover:bg-gray-600 font-medium py-2 px-4 rounded-lg transition duration-300 "
+            />
+          </div>
         </div>
       ))}
     </div>

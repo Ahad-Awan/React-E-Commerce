@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu } from "lucide-react";
-import ViewCart from "../pages/ViewCart";
-import Button from "./Button";
+import { MdAddShoppingCart } from "react-icons/md";
+import { BsFillBagHeartFill } from "react-icons/bs";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,15 +32,12 @@ const Navbar = () => {
         </Link>
 
         {/* Buttons */}
-        <div className="flex h-[5.2vh] md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-4">
+        <div className="flex h-[5.2vh] md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-6">
+          <Link to="/Wishlist">
+            <BsFillBagHeartFill className="text-white text-[35px]" />
+          </Link>
           <Link to="/ViewCart">
-            {/* <ViewCart /> */}
-            <button
-              type="button"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              View Cart
-            </button>
+            <MdAddShoppingCart className="text-white text-[40px]" />
           </Link>
           <button
             type="button"
