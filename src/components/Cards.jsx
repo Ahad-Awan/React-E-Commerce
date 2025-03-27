@@ -67,25 +67,24 @@ const Cards = ({ products, setProducts }) => {
             {product.price}
           </p>
           <p className="text-gray-600 text-center mt-2">{product.desc}</p>
+          <div className="flex justify-between">
+            <Button
+              text="Add to Cart"
+              className="bg-green-500 hover:bg-green-600 font-medium py-2 px-7 w-1/2 rounded-lg transition duration-300 mt-3"
+              onClick={() => addProduct(product)}
+            />
 
-          <Button
-            text="Add to Cart"
-            className="bg-green-500 hover:bg-green-600 font-medium py-2 px-4 w-full rounded-lg transition duration-300 mt-3"
-            onClick={() => addProduct(product)}
-          />
-
-          <div className="flex justify-between mt-2">
             <Button
               text="Add to Wishlist"
               className="bg-red-500 hover:bg-red-600 font-medium py-2 px-4 w-1/2 rounded-lg transition duration-300"
               onClick={() => addToWishlist(product)}
             />
-            <Button
-              onClick={() => removeProduct(index)}
-              text="Remove"
-              className="bg-gray-500 hover:bg-gray-600 font-medium py-2 px-4 rounded-lg transition duration-300"
-            />
           </div>
+          {/* <Button
+            onClick={() => removeProduct(index)}
+            text="Remove"
+            className="bg-gray-500 hover:bg-gray-600 font-medium py-2 px-4 rounded-lg transition duration-300"
+          /> */}
         </div>
       ))}
     </div>
