@@ -4,6 +4,8 @@ import { useNavigate } from "react-router";
 import { CiViewList } from "react-icons/ci";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { RiLogoutBoxLine } from "react-icons/ri";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ViewProduct = () => {
   const navigate = useNavigate();
@@ -14,6 +16,10 @@ const ViewProduct = () => {
 
   const showProduct = () => {
     navigate("/addProduct");
+  };
+
+  const showHome = () => {
+    navigate("/");
   };
 
   return (
@@ -51,7 +57,10 @@ const ViewProduct = () => {
               </a>
             </li>
             <li>
-              <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group cursor-pointer">
+              <a
+                onClick={showHome}
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group cursor-pointer"
+              >
                 <RiLogoutBoxLine className="size-6" />
                 <span className="flex-1 ms-3 whitespace-nowrap">Logout</span>
               </a>
@@ -86,12 +95,20 @@ const ViewCart = () => {
       const updatedCart = prevItems.filter((item) => item.id !== id);
       localStorage.setItem("storeCart", JSON.stringify(updatedCart));
       localStorage.setItem("storeProduct", JSON.stringify(updatedCart)); // Update Home page
+
+      // Show toast notification
+      toast.info("Item removed successfully!", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+
       return updatedCart.map((item, index) => ({ ...item, id: index + 1 }));
     });
   };
 
   return (
     <div className="flex justify-center items-center mt-5">
+      <ToastContainer />
       <div className="w-full bg-white p-6 rounded-lg shadow-lg mx-10 my-4">
         <h1 className="text-3xl font-bold text-center mb-6">Your Cart</h1>
         {cartItems.length > 0 ? (

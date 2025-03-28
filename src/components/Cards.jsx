@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Button from "./Button";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Cards = ({ products, setProducts }) => {
   const [cart, setCart] = useState(
@@ -28,16 +30,19 @@ const Cards = ({ products, setProducts }) => {
     } else {
       setCart([...cart, { ...product, quantity: 1 }]);
     }
+    toast.success("Product added to cart!", { autoClose: 2000 });
   };
 
   const addToWishlist = (product) => {
     const isAlreadyInWishlist = wishlist.some((item) => item.id === product.id);
 
     if (isAlreadyInWishlist) {
-      alert("This item is already in your wishlist!");
+      toast.error("This item is already in your wishlist!", {
+        autoClose: 2000,
+      });
     } else {
       setWishlist([...wishlist, product]);
-      alert("Item added to your wishlist!");
+      toast.success("Item added to your wishlist!", { autoClose: 2000 });
     }
   };
 
@@ -46,10 +51,13 @@ const Cards = ({ products, setProducts }) => {
     updatedProducts.splice(index, 1);
     setProducts(updatedProducts);
     localStorage.setItem("storeProduct", JSON.stringify(updatedProducts));
+    toast.info("Product removed!", { autoClose: 2000 });
   };
 
   return (
     <div className="flex flex-wrap justify-center gap-6">
+      <ToastContainer position="top-center" />
+
       {products.map((product, index) => (
         <div
           key={product.id}
@@ -80,11 +88,6 @@ const Cards = ({ products, setProducts }) => {
               onClick={() => addToWishlist(product)}
             />
           </div>
-          {/* <Button
-            onClick={() => removeProduct(index)}
-            text="Remove"
-            className="bg-gray-500 hover:bg-gray-600 font-medium py-2 px-4 rounded-lg transition duration-300"
-          /> */}
         </div>
       ))}
     </div>

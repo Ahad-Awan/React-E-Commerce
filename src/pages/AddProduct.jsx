@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { MdDashboardCustomize } from "react-icons/md";
 import { CiViewList } from "react-icons/ci";
 import Button from "../components/Button";
@@ -20,7 +22,10 @@ const Modal = ({ products, setProducts }) => {
 
   const handleOutput = () => {
     if (!data.title || !data.price || !data.desc || !data.image) {
-      alert("Please fill all the fields including the image!");
+      toast.error("Please fill all the fields including the image!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
       return;
     }
 
@@ -35,6 +40,11 @@ const Modal = ({ products, setProducts }) => {
     const updatedProducts = [...products, newProduct];
     setProducts(updatedProducts);
     localStorage.setItem("storeProduct", JSON.stringify(updatedProducts));
+
+    toast.success("Product added successfully!", {
+      position: "top-center",
+      autoClose: 2000,
+    });
 
     setData({
       title: "",
@@ -57,6 +67,7 @@ const Modal = ({ products, setProducts }) => {
 
   return (
     <div className="flex items-start justify-center">
+      <ToastContainer />
       <div className="bg-white p-6 rounded-lg shadow-lg">
         <h2 className="text-4xl text-center font-bold mb-5">
           Add Product Data
@@ -67,10 +78,10 @@ const Modal = ({ products, setProducts }) => {
               <img
                 src={data.image}
                 alt="Preview"
-                className="w-full h-32 object-cover rounded"
+                className="w-full h-full object-cover rounded"
               />
             ) : (
-              <div className="w-full h-32 flex items-center justify-center border rounded text-gray-500">
+              <div className="w-full h-full flex items-center justify-center border rounded text-gray-500">
                 No Image
               </div>
             )}
@@ -138,6 +149,10 @@ const AddProduct = () => {
     navigate("/viewProduct");
   };
 
+  const showHome = () => {
+    navigate("/");
+  };
+
   const [products, setProducts] = useState(
     JSON.parse(localStorage.getItem("storeProduct")) || []
   );
@@ -166,7 +181,6 @@ const AddProduct = () => {
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group cursor-pointer"
               >
                 <HiOutlineShoppingBag className="size-6" />
-
                 <span className="flex-1 ms-3 whitespace-nowrap">
                   Add Product
                 </span>
@@ -185,7 +199,7 @@ const AddProduct = () => {
             </li>
             <li>
               <a
-                href="#"
+                onClick={showHome}
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <RiLogoutBoxLine className="size-6" />

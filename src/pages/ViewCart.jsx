@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ViewCart = () => {
   const navigate = useNavigate();
@@ -36,6 +38,7 @@ const ViewCart = () => {
 
   const removeItem = (id) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    toast.info("Item removed from cart!", { autoClose: 2000 });
   };
 
   const totalPrice = cartItems.reduce(
@@ -49,6 +52,9 @@ const ViewCart = () => {
 
   return (
     <div className="min-h-screen p-6 bg-gray-100 flex flex-col items-center">
+      {/* Toast notification centered */}
+      <ToastContainer position="top-center" />
+
       <h1 className="text-3xl font-bold text-center mb-6">Your Cart</h1>
       <div className="w-full bg-white p-6 rounded-lg shadow-lg">
         {cartItems.length > 0 ? (

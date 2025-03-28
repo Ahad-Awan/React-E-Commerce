@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Button from "../components/Button";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Wishlist = () => {
   const [wishlist, setWishlist] = useState(
@@ -13,14 +15,18 @@ const Wishlist = () => {
   const removeFromWishlist = (id) => {
     const updatedWishlist = wishlist.filter((item) => item.id !== id);
     setWishlist(updatedWishlist);
+    toast.info("Removed from wishlist!", { autoClose: 2000 });
   };
 
   return (
     <div className="min-h-screen p-6 bg-gray-100">
+      {/* Toast notification positioned at center */}
+      <ToastContainer position="top-center" />
+
       <h1 className="text-3xl font-bold text-center mb-6">Your Wishlist</h1>
 
       {wishlist.length === 0 ? (
-        <p className="text-center text-2xl  text-gray-600">
+        <p className="text-center text-2xl text-gray-600">
           Your wishlist is empty
         </p>
       ) : (
