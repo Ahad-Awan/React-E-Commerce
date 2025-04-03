@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,9 +14,19 @@ const Login = () => {
 
   const handleSubmit = () => {
     if (email === Email && password === Password) {
-      navigate("/adminDashboard");
+      toast.success("Login successful! Redirecting...", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+
+      setTimeout(() => {
+        navigate("/adminDashboard");
+      }, 3000);
     } else {
-      alert("Invalid email or password");
+      toast.error("Invalid email or password", {
+        position: "top-center",
+        autoClose: 2000,
+      });
     }
   };
 
@@ -55,6 +67,8 @@ const Login = () => {
           </button>
         </div>
       </div>
+
+      <ToastContainer />
     </div>
   );
 };
