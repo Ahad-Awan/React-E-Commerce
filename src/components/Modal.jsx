@@ -22,7 +22,7 @@ const Modal = ({ products, setProducts }) => {
 
     const newProduct = {
       id: Date.now(),
-      title: data.title,
+      title: data.title.slice(0, 30),
       price: data.price,
       desc: data.desc.slice(0, 100),
       image: data.image,

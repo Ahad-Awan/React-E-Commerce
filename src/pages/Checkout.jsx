@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 const Checkout = () => {
-  // Form state
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -9,14 +8,11 @@ const Checkout = () => {
     paymentMethod: "Cash on delivery",
   });
 
-  // Handle input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
   const handleOrder = () => {
-    // Validation: Check if any field is empty
     if (!formData.fullName || !formData.email || !formData.address) {
       alert("Please fill in all fields before confirming your order.");
       return;
@@ -24,7 +20,6 @@ const Checkout = () => {
 
     alert("Thank you for shopping!");
 
-    // Clear form
     setFormData({
       fullName: "",
       email: "",
@@ -36,10 +31,7 @@ const Checkout = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white p-6 rounded-lg shadow-lg w-96 relative">
-        {/* Modal Header */}
         <h2 className="text-2xl font-bold mb-4 text-center">Checkout</h2>
-
-        {/* Checkout Form */}
         <div className="space-y-4">
           <div>
             <label className="block text-gray-700 font-medium">Full Name</label>
@@ -76,7 +68,6 @@ const Checkout = () => {
             ></textarea>
           </div>
 
-          {/* Payment Options */}
           <div>
             <label className="block text-gray-700 font-medium">
               Payment Method
@@ -93,7 +84,6 @@ const Checkout = () => {
             </select>
           </div>
 
-          {/* Confirm Button */}
           <button
             className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
             onClick={handleOrder}

@@ -4,11 +4,15 @@ import { Menu, X } from "lucide-react";
 import { MdAddShoppingCart } from "react-icons/md";
 import { BsFillBagHeartFill } from "react-icons/bs";
 import { useNavigate } from "react-router";
+import Badge from "@mui/material/Badge";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+
+  const cartCount = 3;
+  const wishlistCount = 5;
 
   const isActive = (path) =>
     location.pathname === path
@@ -18,7 +22,6 @@ const Navbar = () => {
   return (
     <nav className="bg-white dark:bg-gray-900 w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
       <div className="flex items-center justify-between p-4 lg:px-12">
-        {/* Logo */}
         <Link to="/" className="flex items-center space-x-3">
           <img
             src="https://flowbite.com/docs/images/logo.svg"
@@ -30,7 +33,6 @@ const Navbar = () => {
           </span>
         </Link>
 
-        {/* Desktop & Tablet Nav Links (Hidden only on small screens) */}
         <div className="hidden md:flex space-x-10 text-lg">
           <Link to="/" className={`py-3 ${isActive("/")}`}>
             Home
@@ -43,13 +45,16 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Icons & Admin Button */}
         <div className="flex items-center space-x-6">
           <Link to="/Wishlist">
-            <BsFillBagHeartFill className="text-gray-700 dark:text-white text-3xl" />
+            <Badge badgeContent={wishlistCount} color="primary">
+              <BsFillBagHeartFill className="text-gray-700 dark:text-white text-[40px]" />
+            </Badge>
           </Link>
           <Link to="/ViewCart">
-            <MdAddShoppingCart className="text-gray-700 dark:text-white text-3xl" />
+            <Badge badgeContent={cartCount} color="primary">
+              <MdAddShoppingCart className="text-gray-700 dark:text-white text-[40px]" />
+            </Badge>
           </Link>
           <button
             onClick={() => navigate("/adminDashboard")}
@@ -57,7 +62,7 @@ const Navbar = () => {
           >
             Admin Dashboard
           </button>
-          {/* Mobile Menu Button (Visible only on small screens) */}
+
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden text-gray-700 dark:text-white text-3xl"
@@ -67,7 +72,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu (Only on small screens) */}
       {isOpen && (
         <div className="md:hidden bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
           <ul className="flex flex-col items-center p-6 space-y-6 text-lg">
