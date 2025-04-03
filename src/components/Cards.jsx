@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Cards = ({ products, setProducts }) => {
   const [cart, setCart] = useState(
-    JSON.parse(localStorage.getItem("storeCart")) || []
+    () => JSON.parse(localStorage.getItem("storeCart")) || []
   );
 
   const [wishlist, setWishlist] = useState(
@@ -26,6 +26,7 @@ const Cards = ({ products, setProducts }) => {
       const updatedCart = cart.map((item) =>
         item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
       );
+
       setCart(updatedCart);
     } else {
       setCart([...cart, { ...product, quantity: 1 }]);
@@ -57,8 +58,7 @@ const Cards = ({ products, setProducts }) => {
   return (
     <div className="flex flex-wrap justify-center gap-6">
       <ToastContainer position="top-center" />
-
-      {products.map((product, index) => (
+      {products.map((product) => (
         <div
           key={product.id}
           className="bg-white p-4 rounded-xl shadow-lg w-80 border border-gray-200"

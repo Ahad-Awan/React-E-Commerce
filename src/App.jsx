@@ -12,6 +12,7 @@ import Wishlist from "./pages/Wishlist";
 import AdminDashboard from "./pages/AdminDashboard";
 import AddProduct from "./pages/AddProduct";
 import ViewProduct from "./pages/ViewProduct";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/adminDashboard" element={<AdminDashboard />} />
         <Route path="/addProduct" element={<AddProduct />} />
         <Route path="/viewProduct" element={<ViewProduct />} />
+        <Route path="/login" element={<Login />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />

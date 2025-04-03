@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { MdAddShoppingCart } from "react-icons/md";
@@ -8,12 +8,23 @@ import Badge from "@mui/material/Badge";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const cartItems = localStorage.getItem("storeCart");
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const [cartCount, setCartCount] = useState(
+    JSON.parse(localStorage.getItem("storeCart")) || 0
+  );
+  const [wishListCart, setWishListCart] = useState(0);
 
-  const cartCount = 3;
-  const wishlistCount = 5;
+  useEffect(() => {
+    setWishListCart(JSON.parse(localStorage.getItem("storeWishlist")));
+  }, [localStorage.getItem("storeWishlist")]);
 
+  // useEffect(() => {
+  //   if (cartCount !== null) {
+  //     setCartCount(JSON.parse(localStorage.getItem("storeCart")));
+  //   }
+  // }, [cartCount]);
   const isActive = (path) =>
     location.pathname === path
       ? "text-blue-700 dark:text-blue-500"
@@ -47,17 +58,19 @@ const Navbar = () => {
 
         <div className="flex items-center space-x-6">
           <Link to="/Wishlist">
-            <Badge badgeContent={wishlistCount} color="primary">
-              <BsFillBagHeartFill className="text-gray-700 dark:text-white text-[40px]" />
-            </Badge>
+            {
+              <Badge badgeContent={wishListCart?.length} color="primary">
+                <BsFillBagHeartFill className="text-gray-700 dark:text-white text-[38px]" />
+              </Badge>
+            }
           </Link>
           <Link to="/ViewCart">
-            <Badge badgeContent={cartCount} color="primary">
+            <Badge badgeContent={cartCount?.length} color="primary">
               <MdAddShoppingCart className="text-gray-700 dark:text-white text-[40px]" />
             </Badge>
           </Link>
           <button
-            onClick={() => navigate("/adminDashboard")}
+            onClick={() => navigate("/login")}
             className="hidden md:block bg-blue-700 text-white px-6 py-3 rounded-lg text-lg hover:bg-blue-800"
           >
             Admin Dashboard
