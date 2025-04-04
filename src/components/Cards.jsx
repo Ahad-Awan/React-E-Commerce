@@ -3,9 +3,9 @@ import Button from "./Button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Cards = ({ products, setProducts }) => {
+const Cards = ({ products }) => {
   const [cart, setCart] = useState(
-    () => JSON.parse(localStorage.getItem("storeCart")) || []
+    JSON.parse(localStorage.getItem("storeCart")) || []
   );
 
   const [wishlist, setWishlist] = useState(
@@ -45,14 +45,6 @@ const Cards = ({ products, setProducts }) => {
       setWishlist([...wishlist, product]);
       toast.success("Item added to your wishlist!", { autoClose: 2000 });
     }
-  };
-
-  const removeProduct = (index) => {
-    const updatedProducts = [...products];
-    updatedProducts.splice(index, 1);
-    setProducts(updatedProducts);
-    localStorage.setItem("storeProduct", JSON.stringify(updatedProducts));
-    toast.info("Product removed!", { autoClose: 2000 });
   };
 
   return (
