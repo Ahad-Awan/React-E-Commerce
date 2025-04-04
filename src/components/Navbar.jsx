@@ -20,10 +20,6 @@ const Navbar = () => {
     setWishListCart(JSON.parse(localStorage.getItem("storeWishlist")));
   }, [localStorage.getItem("storeWishlist")]);
 
-  useEffect(() => {
-    setCartCount(JSON.parse(localStorage.getItem("storeCart")));
-  }, [localStorage.getItem("storeCart")]);
-
   // useEffect(() => {
   //   if (cartCount !== null) {
   //     setCartCount(JSON.parse(localStorage.getItem("storeCart")));
