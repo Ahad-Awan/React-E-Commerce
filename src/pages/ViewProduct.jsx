@@ -159,7 +159,7 @@ const ViewProducts = () => {
                     </button>
                     <button
                       onClick={() => removeProduct(product.id)}
-                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 "
+                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 ml-2"
                     >
                       Remove
                     </button>

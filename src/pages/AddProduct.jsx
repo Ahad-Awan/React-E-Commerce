@@ -14,6 +14,7 @@ const Modal = ({ products, setProducts }) => {
     price: "",
     desc: "",
     image: "",
+    category: "",
   });
 
   useEffect(() => {
@@ -21,8 +22,14 @@ const Modal = ({ products, setProducts }) => {
   }, [products]);
 
   const handleOutput = () => {
-    if (!data.title || !data.price || !data.desc || !data.image) {
-      toast.error("Please fill all the fields including the image!", {
+    if (
+      !data.title ||
+      !data.price ||
+      !data.desc ||
+      !data.image ||
+      !data.category
+    ) {
+      toast.error("Please fill all the fields including the category!", {
         position: "top-center",
         autoClose: 3000,
       });
@@ -35,6 +42,7 @@ const Modal = ({ products, setProducts }) => {
       price: data.price,
       desc: data.desc.slice(0, 100),
       image: data.image,
+      category: data.category,
     };
 
     const updatedProducts = [...products, newProduct];
@@ -50,7 +58,8 @@ const Modal = ({ products, setProducts }) => {
       title: "",
       price: "",
       desc: "",
-      image: null,
+      image: "",
+      category: "",
     });
   };
 
@@ -100,7 +109,7 @@ const Modal = ({ products, setProducts }) => {
             <input
               type="text"
               name="price"
-              placeholder="Price"
+              placeholder="Product Price"
               value={data.price}
               onChange={(e) =>
                 setData((prev) => ({ ...prev, price: e.target.value }))
@@ -109,13 +118,31 @@ const Modal = ({ products, setProducts }) => {
             />
             <textarea
               name="description"
-              placeholder="Description"
+              placeholder="Product Description"
               value={data.desc}
               onChange={(e) =>
                 setData((prev) => ({ ...prev, desc: e.target.value }))
               }
               className="w-full p-2 border rounded mb-2 h-20 resize-none"
             ></textarea>
+            <select
+              name="category"
+              value={data.category}
+              onChange={(e) =>
+                setData((prev) => ({ ...prev, category: e.target.value }))
+              }
+              className="w-full p-2 border rounded mb-2"
+            >
+              <option value="">Select Category</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Clothing">Clothing</option>
+              <option value="Home & Furniture">Home & Furniture</option>
+              <option value="Beauty & Personal Care">
+                Beauty & Personal Care
+              </option>
+              <option value="Toys & Games">Toys & Games</option>
+              <option value="Sports & Outdoors">Sports & Outdoors</option>
+            </select>
             <input
               type="file"
               accept="image/*"
