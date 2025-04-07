@@ -70,48 +70,57 @@ const ViewProduct = () => {
       </aside>
 
       <div className="flex-1">
-        <ViewCart />
+        <ViewProducts />
       </div>
     </div>
   );
 };
 
-const ViewCart = () => {
-  const [cartItems, setCartItems] = useState(() => {
-    const storedCart = JSON.parse(localStorage.getItem("storeCart")) || [];
-    return storedCart.map((item, index) => ({
-      ...item,
-      id: index + 1,
-      quantity: item.quantity || 1,
-    }));
-  });
+const ViewProducts = () => {
+  const [products, setProducts] = useState([]);
+  const [editProduct, setEditProduct] = useState(null);
 
   useEffect(() => {
-    localStorage.setItem("storeCart", JSON.stringify(cartItems));
-  }, [cartItems]);
+    const storedProducts =
+      JSON.parse(localStorage.getItem("storeProduct")) || [];
+    setProducts(storedProducts);
+  }, []);
 
-  const removeItem = (id) => {
-    setCartItems((prevItems) => {
-      const updatedCart = prevItems.filter((item) => item.id !== id);
-      localStorage.setItem("storeCart", JSON.stringify(updatedCart));
-      localStorage.setItem("storeProduct", JSON.stringify(updatedCart)); // Update Home page
-
-      // Show toast notification
-      toast.info("Item removed successfully!", {
-        position: "top-center",
-        autoClose: 2000,
-      });
-
-      return updatedCart.map((item, index) => ({ ...item, id: index + 1 }));
+  const removeProduct = (id) => {
+    const updatedProducts = products.filter((product) => product.id !== id);
+    setProducts(updatedProducts);
+    localStorage.setItem("storeProduct", JSON.stringify(updatedProducts));
+    toast.info("Product removed successfully!", {
+      position: "top-center",
+      autoClose: 2000,
     });
+  };
+
+  const handleEdit = (product) => {
+    setEditProduct(product);
+  };
+
+  const handleSaveEdit = () => {
+    const updatedProducts = products.map((product) =>
+      product.id === editProduct.id ? editProduct : product
+    );
+    setProducts(updatedProducts);
+    localStorage.setItem("storeProduct", JSON.stringify(updatedProducts));
+
+    toast.success("Product updated successfully!", {
+      position: "top-center",
+      autoClose: 2000,
+    });
+
+    setEditProduct(null);
   };
 
   return (
     <div className="flex justify-center items-center mt-5">
       <ToastContainer />
       <div className="w-full bg-white p-6 rounded-lg shadow-lg mx-10 my-4">
-        <h1 className="text-3xl font-bold text-center mb-6">Your Cart</h1>
-        {cartItems.length > 0 ? (
+        <h1 className="text-3xl font-bold text-center mb-6">View Products</h1>
+        {products.length > 0 ? (
           <table className="w-full border-collapse border border-gray-300">
             <thead>
               <tr className="bg-gray-200">
@@ -124,25 +133,33 @@ const ViewCart = () => {
               </tr>
             </thead>
             <tbody>
-              {cartItems.map((item) => (
-                <tr key={item.id} className="text-center">
-                  <td className="border border-gray-300 p-2">{item.id}</td>
+              {products.map((product) => (
+                <tr key={product.id} className="text-center">
+                  <td className="border border-gray-300 p-2">{product.id}</td>
                   <td className="border border-gray-300 p-2">
                     <img
-                      src={item.image}
-                      alt={item.title}
+                      src={product.image}
+                      alt={product.title}
                       className="w-16 h-16 object-cover rounded mx-auto"
                     />
                   </td>
-                  <td className="border border-gray-300 p-2">{item.title}</td>
-                  <td className="border border-gray-300 p-2">{item.desc}</td>
+                  <td className="border border-gray-300 p-2">
+                    {product.title}
+                  </td>
+                  <td className="border border-gray-300 p-2">{product.desc}</td>
                   <td className="border border-gray-300 p-2 font-semibold">
-                    {item.price}
+                    {product.price}
                   </td>
                   <td className="border border-gray-300 p-2">
                     <button
-                      onClick={() => removeItem(item.id)}
-                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                      onClick={() => handleEdit(product)}
+                      className="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600 mb-2"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => removeProduct(product.id)}
+                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 "
                     >
                       Remove
                     </button>
@@ -153,8 +170,53 @@ const ViewCart = () => {
           </table>
         ) : (
           <p className="text-center text-lg font-semibold">
-            Your cart is empty.
+            No products available.
           </p>
+        )}
+
+        {editProduct && (
+          <div className="mt-5 p-5 border border-gray-300 rounded-lg">
+            <h2 className="text-2xl font-semibold mb-4">Edit Product</h2>
+            <div>
+              <label className="block mb-2">Title</label>
+              <input
+                type="text"
+                value={editProduct.title}
+                onChange={(e) =>
+                  setEditProduct({ ...editProduct, title: e.target.value })
+                }
+                className="border p-2 w-full mb-4"
+              />
+            </div>
+            <div>
+              <label className="block mb-2">Description</label>
+              <input
+                type="text"
+                value={editProduct.desc}
+                onChange={(e) =>
+                  setEditProduct({ ...editProduct, desc: e.target.value })
+                }
+                className="border p-2 w-full mb-4"
+              />
+            </div>
+            <div>
+              <label className="block mb-2">Price</label>
+              <input
+                type="number"
+                value={editProduct.price}
+                onChange={(e) =>
+                  setEditProduct({ ...editProduct, price: e.target.value })
+                }
+                className="border p-2 w-full mb-4"
+              />
+            </div>
+            <button
+              onClick={handleSaveEdit}
+              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+            >
+              Save Changes
+            </button>
+          </div>
         )}
       </div>
     </div>
