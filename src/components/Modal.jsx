@@ -88,7 +88,7 @@ const Modal = ({ products, setProducts }) => {
             />
             <textarea
               name="description"
-              placeholder="Description"
+              placeholder="Product Description"
               value={data.desc}
               onChange={(e) =>
                 setData((prev) => ({ ...prev, desc: e.target.value }))
