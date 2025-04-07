@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdDashboardCustomize } from "react-icons/md";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
@@ -11,6 +11,20 @@ const AdminDashboard = () => {
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  useEffect(() => {
+    const isAdmin = localStorage.getItem("isAdmin");
+    const token = localStorage.getItem("token");
+    if (isAdmin !== "true" || !token) {
+      navigate("/login");
+    }
+  }, [navigate]);
+
+  const handleLogout = () => {
+    localStorage.setItem("isAdmin", "false");
+    localStorage.setItem("token", "");
+    navigate("/login");
   };
 
   return (
@@ -60,7 +74,7 @@ const AdminDashboard = () => {
             </li>
             <li>
               <a
-                onClick={() => navigate("/")}
+                onClick={handleLogout}
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
               >
                 <RiLogoutBoxLine className="size-6" />

@@ -32,7 +32,7 @@ const Home = () => {
     <>
       <div className="mt-10 mb-10 min-h-screen">
         <h1 className="text-4xl font-bold text-center mb-6">Our Products</h1>
-        <div className="flex justify-center space-x-4 mb-8">
+        <div className="flex flex-wrap justify-center space-x-4 mb-8 gap-2">
           {categories.map((category, index) => (
             <button
               key={index}
@@ -40,7 +40,7 @@ const Home = () => {
                 selectedCategory === category
                   ? "bg-blue-500 text-white"
                   : "bg-gray-200 text-gray-700"
-              } px-10 py-2 rounded-lg transition duration-300 hover:bg-blue-300`}
+              } px-10 py-2 rounded-lg transition duration-300 hover:bg-blue-300 w-full sm:w-auto`}
               onClick={() => setSelectedCategory(category)}
             >
               {category}

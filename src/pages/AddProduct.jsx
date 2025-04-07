@@ -176,13 +176,23 @@ const AddProduct = () => {
     navigate("/viewProduct");
   };
 
-  const showHome = () => {
-    navigate("/");
-  };
-
   const [products, setProducts] = useState(
     JSON.parse(localStorage.getItem("storeProduct")) || []
   );
+
+  useEffect(() => {
+    const isAdmin = localStorage.getItem("isAdmin");
+    const token = localStorage.getItem("token");
+    if (isAdmin !== "true" || !token) {
+      navigate("/login");
+    }
+  }, [navigate]);
+
+  const handleLogout = () => {
+    localStorage.setItem("isAdmin", "false");
+    localStorage.setItem("token", "");
+    navigate("/login");
+  };
 
   return (
     <div className="flex h-[77.3vh]">
@@ -226,8 +236,8 @@ const AddProduct = () => {
             </li>
             <li>
               <a
-                onClick={showHome}
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                onClick={handleLogout}
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group cursor-pointer"
               >
                 <RiLogoutBoxLine className="size-6" />
                 <span className="flex-1 ms-3 whitespace-nowrap">Logout</span>

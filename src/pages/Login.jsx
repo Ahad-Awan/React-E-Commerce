@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 
 const Login = () => {
@@ -10,8 +10,18 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    const isAdmin = localStorage.getItem("isAdmin");
+    const token = localStorage.getItem("token");
+    if (isAdmin === "true" && token) {
+      navigate("/adminDashboard");
+    }
+  }, [navigate]);
+
   const handleSubmit = () => {
     if (email === Email && password === Password) {
+      localStorage.setItem("isAdmin", "true");
+      localStorage.setItem("token", "Ahad");
       navigate("/adminDashboard");
     } else {
       alert("Invalid email or password");

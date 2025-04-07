@@ -18,8 +18,18 @@ const ViewProduct = () => {
     navigate("/addProduct");
   };
 
-  const showHome = () => {
-    navigate("/");
+  useEffect(() => {
+    const isAdmin = localStorage.getItem("isAdmin");
+    const token = localStorage.getItem("token");
+    if (isAdmin !== "true" || !token) {
+      navigate("/login");
+    }
+  }, [navigate]);
+
+  const handleLogout = () => {
+    localStorage.setItem("isAdmin", "false");
+    localStorage.setItem("token", "");
+    navigate("/login");
   };
 
   return (
@@ -58,7 +68,7 @@ const ViewProduct = () => {
             </li>
             <li>
               <a
-                onClick={showHome}
+                onClick={handleLogout}
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group cursor-pointer"
               >
                 <RiLogoutBoxLine className="size-6" />
