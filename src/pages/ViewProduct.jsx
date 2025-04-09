@@ -126,7 +126,7 @@ const ViewProducts = () => {
   };
 
   return (
-    <div className="flex justify-center items-center mt-5">
+    <div className="flex justify-center items-center ">
       <ToastContainer />
       <div className="w-full bg-white p-6 rounded-lg shadow-lg mx-10 my-4">
         <h1 className="text-3xl font-bold text-center mb-6">View Products</h1>
@@ -156,7 +156,9 @@ const ViewProducts = () => {
                   <td className="border border-gray-300 p-2">
                     {product.title}
                   </td>
-                  <td className="border border-gray-300 p-2">{product.desc}</td>
+                  <td className="border border-gray-300 p-2">
+                    {product.desc.slice(0, 100)}
+                  </td>
                   <td className="border border-gray-300 p-2 font-semibold">
                     {product.price}
                   </td>

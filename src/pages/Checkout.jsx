@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Import the styles
 
 const Checkout = () => {
   const [formData, setFormData] = useState({
@@ -18,7 +21,7 @@ const Checkout = () => {
       return;
     }
 
-    alert("Thank you for shopping!");
+    toast.success("Thank you for shopping!");
 
     setFormData({
       fullName: "",
@@ -26,7 +29,13 @@ const Checkout = () => {
       address: "",
       paymentMethod: "Cash on delivery",
     });
+
+    setTimeout(() => {
+      navigate("/");
+    }, 3000);
   };
+
+  const navigate = useNavigate();
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -92,6 +101,13 @@ const Checkout = () => {
           </button>
         </div>
       </div>
+
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        closeOnClick
+        pauseOnHover
+      />
     </div>
   );
 };

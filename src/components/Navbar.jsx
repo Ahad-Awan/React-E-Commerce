@@ -26,6 +26,12 @@ const Navbar = () => {
       ? "text-blue-700 dark:text-blue-500"
       : "text-gray-900 dark:text-white";
 
+  const handleAdminDashboardClick = () => {
+    if (location.pathname !== "/adminDashboard") {
+      navigate("/adminDashboard");
+    }
+  };
+
   return (
     <nav className="bg-white dark:bg-gray-900 w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
       <div className="flex items-center justify-between p-4 lg:px-12">
@@ -66,7 +72,7 @@ const Navbar = () => {
             </Badge>
           </Link>
           <button
-            onClick={() => navigate("/login")}
+            onClick={handleAdminDashboardClick}
             className="hidden md:block bg-blue-700 text-white px-6 py-3 rounded-lg text-lg hover:bg-blue-800"
           >
             Admin Dashboard
@@ -114,7 +120,7 @@ const Navbar = () => {
             <button
               onClick={() => {
                 setIsOpen(false);
-                navigate("/adminDashboard");
+                handleAdminDashboardClick();
               }}
               className="w-full bg-blue-700 text-white px-6 py-3 rounded-lg text-lg"
             >
