@@ -31,7 +31,7 @@ const Navbar = () => {
       <div className="flex items-center justify-between p-4 lg:px-12">
         <Link to="/" className="flex items-center space-x-3">
           <img
-            src="https://flowbite.com/docs/images/logo.svg"
+            src="https://cdn-icons-png.flaticon.com/512/8866/8866156.png"
             className="h-10"
             alt="Logo"
           />
