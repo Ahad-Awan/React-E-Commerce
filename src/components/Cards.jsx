@@ -63,7 +63,7 @@ const Cards = ({ products, setProducts }) => {
             {product.title.slice(0, 20)}
           </h1>
           <p className="text-xl text-blue-600 font-semibold text-center mt-2">
-            {product.price}
+            ${product.price}
           </p>
           <p className="text-gray-600 text-center mt-2">
             {product.description

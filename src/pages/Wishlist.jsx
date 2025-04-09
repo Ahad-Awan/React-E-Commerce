@@ -20,7 +20,6 @@ const Wishlist = () => {
 
   return (
     <div className="min-h-screen p-6 bg-gray-100">
-      {/* Toast notification positioned at center */}
       <ToastContainer position="top-center" />
 
       <h1 className="text-3xl font-bold text-center mb-6">Your Wishlist</h1>
@@ -45,10 +44,10 @@ const Wishlist = () => {
                 {product.title}
               </h1>
               <p className="text-xl text-blue-600 font-semibold text-center mt-2">
-                {product.price}
+                ${product.price}
               </p>
               <p className="text-gray-600 text-center mt-2">
-                {product.description}
+                {product.desc.slice(0, 100)}
               </p>
 
               <Button
