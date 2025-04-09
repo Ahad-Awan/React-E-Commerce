@@ -12,7 +12,7 @@ const Modal = ({ products, setProducts }) => {
   const [data, setData] = useState({
     title: "",
     price: "",
-    desc: "",
+    description: "",
     image: "",
     category: "",
   });
@@ -25,7 +25,7 @@ const Modal = ({ products, setProducts }) => {
     if (
       !data.title ||
       !data.price ||
-      !data.desc ||
+      !data.description ||
       !data.image ||
       !data.category
     ) {
@@ -40,7 +40,7 @@ const Modal = ({ products, setProducts }) => {
       id: Date.now(),
       title: data.title.slice(0, 30),
       price: data.price,
-      desc: data.desc.slice(0, 100),
+      description: data.description.slice(0, 100),
       image: data.image,
       category: data.category,
     };
@@ -57,7 +57,7 @@ const Modal = ({ products, setProducts }) => {
     setData({
       title: "",
       price: "",
-      desc: "",
+      description: "",
       image: "",
       category: "",
     });
@@ -119,9 +119,9 @@ const Modal = ({ products, setProducts }) => {
             <textarea
               name="description"
               placeholder="Product Description"
-              value={data.desc}
+              value={data.description}
               onChange={(e) =>
-                setData((prev) => ({ ...prev, desc: e.target.value }))
+                setData((prev) => ({ ...prev, description: e.target.value }))
               }
               className="w-full p-2 border rounded mb-2 h-20 resize-none"
             ></textarea>

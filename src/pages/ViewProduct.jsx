@@ -204,7 +204,10 @@ const ViewProducts = () => {
                 type="text"
                 value={editProduct.desc}
                 onChange={(e) =>
-                  setEditProduct({ ...editProduct, desc: e.target.value })
+                  setEditProduct({
+                    ...editProduct,
+                    desc: e.target.value,
+                  })
                 }
                 className="border p-2 w-full mb-4"
               />

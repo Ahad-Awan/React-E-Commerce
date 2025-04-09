@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "./Button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Cards = ({ products }) => {
+const Cards = ({ products, setProducts }) => {
   const [cart, setCart] = useState(
     JSON.parse(localStorage.getItem("storeCart")) || []
   );
@@ -26,7 +26,6 @@ const Cards = ({ products }) => {
       const updatedCart = cart.map((item) =>
         item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
       );
-
       setCart(updatedCart);
     } else {
       setCart([...cart, { ...product, quantity: 1 }]);
@@ -61,12 +60,16 @@ const Cards = ({ products }) => {
             className="w-full h-60 object-contain rounded-lg"
           />
           <h1 className="text-2xl font-bold text-center text-gray-900">
-            {product.title}
+            {product.title.slice(0, 20)}
           </h1>
           <p className="text-xl text-blue-600 font-semibold text-center mt-2">
             {product.price}
           </p>
-          <p className="text-gray-600 text-center mt-2">{product.desc}</p>
+          <p className="text-gray-600 text-center mt-2">
+            {product.description
+              ? product.description.slice(0, 100)
+              : product.desc.slice(0, 100)}
+          </p>
           <div className="flex justify-between">
             <Button
               text="Add to Cart"

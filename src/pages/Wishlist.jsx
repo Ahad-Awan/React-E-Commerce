@@ -47,7 +47,9 @@ const Wishlist = () => {
               <p className="text-xl text-blue-600 font-semibold text-center mt-2">
                 {product.price}
               </p>
-              <p className="text-gray-600 text-center mt-2">{product.desc}</p>
+              <p className="text-gray-600 text-center mt-2">
+                {product.description}
+              </p>
 
               <Button
                 text="Remove from Wishlist"

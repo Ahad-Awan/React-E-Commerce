@@ -6,7 +6,7 @@ const Modal = ({ products, setProducts }) => {
   const [data, setData] = useState({
     title: "",
     price: "",
-    desc: "",
+    description: "",
     image: "",
   });
 
@@ -15,16 +15,16 @@ const Modal = ({ products, setProducts }) => {
   }, [products]);
 
   const handleOutput = () => {
-    if (!data.title || !data.price || !data.desc || !data.image) {
+    if (!data.title || !data.price || !data.description || !data.image) {
       alert("Please fill all the fields including the image!");
       return;
     }
 
     const newProduct = {
       id: Date.now(),
-      title: data.title.slice(0, 30),
+      title: data.title.slice(0, 25),
       price: data.price,
-      desc: data.desc.slice(0, 100),
+      description: data.description.slice(0, 100),
       image: data.image,
     };
 
@@ -34,7 +34,7 @@ const Modal = ({ products, setProducts }) => {
     setData({
       title: "",
       price: "",
-      desc: "",
+      description: "",
       image: null,
     });
 
@@ -89,9 +89,9 @@ const Modal = ({ products, setProducts }) => {
             <textarea
               name="description"
               placeholder="Description"
-              value={data.desc}
+              value={data.description}
               onChange={(e) =>
-                setData((prev) => ({ ...prev, desc: e.target.value }))
+                setData((prev) => ({ ...prev, description: e.target.value }))
               }
               className="w-full p-2 border rounded mb-2"
             ></textarea>

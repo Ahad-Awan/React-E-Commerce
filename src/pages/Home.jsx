@@ -1,16 +1,29 @@
 import React, { useState, useEffect } from "react";
 import Cards from "../components/Cards";
+import Loader from "../components/Loader";
 
 const Home = () => {
   const [products, setProducts] = useState(
     JSON.parse(localStorage.getItem("storeProduct")) || []
   );
+  const [fetchedProducts, setFetchedProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedProducts =
-      JSON.parse(localStorage.getItem("storeProduct")) || [];
-    setProducts(storedProducts);
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("https://fakestoreapi.com/products");
+        const data = await response.json();
+        setFetchedProducts(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
   }, []);
 
   const categories = [
@@ -23,15 +36,20 @@ const Home = () => {
     "Sports & Outdoors",
   ];
 
+  const combinedProducts = [...products, ...fetchedProducts];
+
   const filteredProducts =
     selectedCategory === "All"
-      ? products
-      : products.filter((product) => product.category === selectedCategory);
+      ? combinedProducts
+      : combinedProducts.filter(
+          (product) => product.category === selectedCategory
+        );
 
   return (
     <>
       <div className="mt-10 mb-10 min-h-screen">
         <h1 className="text-4xl font-bold text-center mb-6">Our Products</h1>
+
         <div className="flex flex-wrap justify-center space-x-4 mb-8 gap-2">
           {categories.map((category, index) => (
             <button
@@ -47,7 +65,14 @@ const Home = () => {
             </button>
           ))}
         </div>
-        <Cards products={filteredProducts} setProducts={setProducts} />
+
+        {loading ? (
+          <div className="flex justify-center items-center min-h-[500px]">
+            <Loader />
+          </div>
+        ) : (
+          <Cards products={filteredProducts} setProducts={setProducts} />
+        )}
       </div>
     </>
   );
