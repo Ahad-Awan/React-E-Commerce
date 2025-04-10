@@ -41,13 +41,13 @@ const Wishlist = () => {
                 className="w-full h-60 object-contain rounded-lg"
               />
               <h1 className="text-2xl font-bold text-center text-gray-900">
-                {product.title}
+                {product.title.slice(0, 20)}
               </h1>
               <p className="text-xl text-blue-600 font-semibold text-center mt-2">
                 ${product.price}
               </p>
               <p className="text-gray-600 text-center mt-2">
-                {product.desc.slice(0, 100)}
+                {product.description.slice(0, 100)}
               </p>
 
               <Button
