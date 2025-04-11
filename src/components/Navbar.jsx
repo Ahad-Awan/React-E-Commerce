@@ -61,13 +61,13 @@ const Navbar = () => {
         <div className="flex items-center space-x-6">
           <Link to="/Wishlist">
             {
-              <Badge badgeContent={wishListCart.length} color="primary">
+              <Badge color="primary">
                 <BsFillBagHeartFill className="text-gray-700 dark:text-white text-[38px]" />
               </Badge>
             }
           </Link>
           <Link to="/ViewCart">
-            <Badge badgeContent={cartCount.length} color="primary">
+            <Badge color="primary">
               <MdAddShoppingCart className="text-gray-700 dark:text-white text-[40px]" />
             </Badge>
           </Link>
