@@ -157,7 +157,7 @@ const ViewProducts = () => {
                     {product.title}
                   </td>
                   <td className="border border-gray-300 p-2">
-                    {product.desc.slice(0, 100)}
+                    {product.description.slice(0, 100)}
                   </td>
                   <td className="border border-gray-300 p-2 font-semibold">
                     {product.price}
