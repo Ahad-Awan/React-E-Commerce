@@ -204,11 +204,11 @@ const ViewProducts = () => {
               <label className="block mb-2">Description</label>
               <input
                 type="text"
-                value={editProduct.desc}
+                value={editProduct.description}
                 onChange={(e) =>
                   setEditProduct({
                     ...editProduct,
-                    desc: e.target.value,
+                    description: e.target.value,
                   })
                 }
                 className="border p-2 w-full mb-4"
