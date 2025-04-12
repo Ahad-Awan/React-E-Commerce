@@ -33,10 +33,10 @@ const ViewProduct = () => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex min-h-screen">
       {/* Sidebar */}
-      <aside className="top-0 left-0 z-40 w-64 h-screen bg-gray-50 dark:bg-gray-900 transition-transform -translate-x-full sm:translate-x-0">
-        <div className="h-full px-3 py-4 overflow-y-auto">
+      <aside className="w-64 bg-gray-50 dark:bg-gray-900">
+        <div className="px-3 py-4 overflow-y-auto">
           <ul className="space-y-2 font-medium">
             <li>
               <a
@@ -79,7 +79,7 @@ const ViewProduct = () => {
         </div>
       </aside>
 
-      <div className="flex-1">
+      <div className="flex-1 bg-gray-100">
         <ViewProducts />
       </div>
     </div>
@@ -126,9 +126,9 @@ const ViewProducts = () => {
   };
 
   return (
-    <div className="flex justify-center items-center ">
+    <div className="flex justify-center items-start">
       <ToastContainer />
-      <div className="w-full bg-white p-6 rounded-lg shadow-lg mx-10 my-4">
+      <div className="w-full bg-white p-6 rounded-lg shadow-lg mx-10 my-6">
         <h1 className="text-3xl font-bold text-center mb-6">View Products</h1>
         {products.length > 0 ? (
           <table className="w-full border-collapse border border-gray-300">
