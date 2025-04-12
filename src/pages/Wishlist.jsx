@@ -10,6 +10,7 @@ const Wishlist = () => {
 
   useEffect(() => {
     localStorage.setItem("storeWishlist", JSON.stringify(wishlist));
+    window.dispatchEvent(new Event("wishlistUpdated"));
   }, [wishlist]);
 
   const removeFromWishlist = (id) => {

@@ -3,7 +3,7 @@ import Button from "./Button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Cards = ({ products, setProducts }) => {
+const Cards = ({ products }) => {
   const [cart, setCart] = useState(
     JSON.parse(localStorage.getItem("storeCart")) || []
   );
@@ -14,10 +14,12 @@ const Cards = ({ products, setProducts }) => {
 
   useEffect(() => {
     localStorage.setItem("storeCart", JSON.stringify(cart));
+    window.dispatchEvent(new Event("cartUpdated")); // 🔥 Custom Event
   }, [cart]);
 
   useEffect(() => {
     localStorage.setItem("storeWishlist", JSON.stringify(wishlist));
+    window.dispatchEvent(new Event("wishlistUpdated")); // 🔥 Custom Event
   }, [wishlist]);
 
   const addProduct = (product) => {
@@ -79,7 +81,7 @@ const Cards = ({ products, setProducts }) => {
 
             <Button
               text="Add to Wishlist"
-              className="bg-red-500 hover:bg-red-600 font-medium py-2 px-4 w-1/2 rounded-lg transition duration-300"
+              className="bg-red-500 hover:bg-red-600 font-medium py-2 px-4 w-1/2 rounded-lg transition duration-300 mt-3"
               onClick={() => addToWishlist(product)}
             />
           </div>

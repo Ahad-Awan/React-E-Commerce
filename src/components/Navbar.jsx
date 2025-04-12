@@ -14,12 +14,31 @@ const Navbar = () => {
   const [wishListCart, setWishListCart] = useState(0);
 
   useEffect(() => {
-    setCartCount(JSON.parse(localStorage.getItem("storeCart")));
-  }, [localStorage.getItem("storeCart")]);
+    const updateCart = () => {
+      const storedCart = JSON.parse(localStorage.getItem("storeCart")) || [];
+      setCartCount(storedCart.length);
+    };
 
-  useEffect(() => {
-    setWishListCart(JSON.parse(localStorage.getItem("storeWishlist")));
-  }, [localStorage.getItem("storeWishlist")]);
+    const updateWishlist = () => {
+      const storedWishlist =
+        JSON.parse(localStorage.getItem("storeWishlist")) || [];
+      setWishListCart(storedWishlist.length);
+    };
+
+    // Initial load
+    updateCart();
+    updateWishlist();
+
+    // Listen to custom events
+    window.addEventListener("cartUpdated", updateCart);
+    window.addEventListener("wishlistUpdated", updateWishlist);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("cartUpdated", updateCart);
+      window.removeEventListener("wishlistUpdated", updateWishlist);
+    };
+  }, []);
 
   const isActive = (path) =>
     location.pathname === path
@@ -60,17 +79,17 @@ const Navbar = () => {
 
         <div className="flex items-center space-x-6">
           <Link to="/Wishlist">
-            {
-              <Badge color="primary">
-                <BsFillBagHeartFill className="text-gray-700 dark:text-white text-[38px]" />
-              </Badge>
-            }
+            <Badge badgeContent={wishListCart} color="primary">
+              <BsFillBagHeartFill className="text-gray-700 dark:text-white text-[38px]" />
+            </Badge>
           </Link>
+
           <Link to="/ViewCart">
-            <Badge color="primary">
+            <Badge badgeContent={cartCount} color="primary">
               <MdAddShoppingCart className="text-gray-700 dark:text-white text-[40px]" />
             </Badge>
           </Link>
+
           <button
             onClick={handleAdminDashboardClick}
             className="hidden md:block bg-blue-700 text-white px-6 py-3 rounded-lg text-lg hover:bg-blue-800"
