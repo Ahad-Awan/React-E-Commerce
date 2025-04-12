@@ -160,7 +160,7 @@ const ViewProducts = () => {
                     {product.description.slice(0, 100)}
                   </td>
                   <td className="border border-gray-300 p-2 font-semibold">
-                    {product.price}
+                    ${product.price}
                   </td>
                   <td className="border border-gray-300 p-2">
                     <button

@@ -6,12 +6,6 @@ import "react-toastify/dist/ReactToastify.css";
 const ViewCart = () => {
   const navigate = useNavigate();
 
-  const [removeCount, setRemoveCount] = useState(0);
-
-  useEffect(() => {
-    setRemoveCount(JSON.parse(localStorage.getItem("storeCart")));
-  }, [localStorage.getItem("storeCart")]);
-
   const [cartItems, setCartItems] = useState(() => {
     const storedCart = JSON.parse(localStorage.getItem("storeCart")) || [];
     return storedCart.map((item) => ({
