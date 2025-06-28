@@ -13,6 +13,10 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AddProduct from "./pages/AddProduct";
 import ViewProduct from "./pages/ViewProduct";
 import Login from "./pages/Login";
+import ReturnPolicy from "./pages/Returns";
+import PrivacyPolicy from "./pages/Privacy";
+import TermsConditions from "./pages/Terms";
+import HelpSupport from "./pages/Support";
 
 function App() {
   return (
@@ -30,6 +34,10 @@ function App() {
         <Route path="/addProduct" element={<AddProduct />} />
         <Route path="/viewProduct" element={<ViewProduct />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/returns" element={<ReturnPolicy />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsConditions />} />
+        <Route path="/support" element={<HelpSupport />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />
