@@ -13,6 +13,8 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 8;
 
+  const [searchTerm, setSearchTerm] = useState("");
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -41,12 +43,18 @@ const Home = () => {
 
   const combinedProducts = [...products, ...fetchedProducts];
 
-  const filteredProducts =
+  // Filter by category
+  const categoryFiltered =
     selectedCategory === "All"
       ? combinedProducts
       : combinedProducts.filter(
           (product) => product.category === selectedCategory
         );
+
+  // Filter by search term (case-insensitive)
+  const filteredProducts = categoryFiltered.filter((product) =>
+    product.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -81,8 +89,22 @@ const Home = () => {
   );
 
   return (
-    <div className="mt-10 mb-10 min-h-screen">
+    <div className="mt-10 mb-10 min-h-screen px-4 sm:px-0">
       <h1 className="text-4xl font-bold text-center mb-6">Our Products</h1>
+
+      {/* Search Input */}
+      <div className="flex justify-center mb-6">
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={searchTerm}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setCurrentPage(1);
+          }}
+          className="w-full max-w-md px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+      </div>
 
       <div className="flex flex-wrap justify-center space-x-4 mb-8 gap-2">
         {categories.map((category, index) => (

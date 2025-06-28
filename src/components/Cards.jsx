@@ -72,16 +72,16 @@ const Cards = ({ products }) => {
               ? product.description.slice(0, 100)
               : product.desc.slice(0, 100)}
           </p>
-          <div className="flex justify-between">
+
+          <div className="flex flex-col">
             <Button
               text="Add to Cart"
-              className="bg-green-500 hover:bg-green-600 font-medium py-2 px-7 w-1/2 rounded-lg transition duration-300 mt-3"
+              className="bg-green-500 hover:bg-green-600 font-medium py-2 px-4 w-full rounded-lg transition duration-300"
               onClick={() => addProduct(product)}
             />
-
             <Button
               text="Add to Wishlist"
-              className="bg-red-500 hover:bg-red-600 font-medium py-2 px-4 w-1/2 rounded-lg transition duration-300 mt-3"
+              className="bg-red-500 hover:bg-red-600 font-medium py-2 px-4 w-full rounded-lg transition duration-300"
               onClick={() => addToWishlist(product)}
             />
           </div>
