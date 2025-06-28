@@ -14,12 +14,12 @@ const Cards = ({ products }) => {
 
   useEffect(() => {
     localStorage.setItem("storeCart", JSON.stringify(cart));
-    window.dispatchEvent(new Event("cartUpdated")); // 🔥 Custom Event
+    window.dispatchEvent(new Event("cartUpdated"));
   }, [cart]);
 
   useEffect(() => {
     localStorage.setItem("storeWishlist", JSON.stringify(wishlist));
-    window.dispatchEvent(new Event("wishlistUpdated")); // 🔥 Custom Event
+    window.dispatchEvent(new Event("wishlistUpdated"));
   }, [wishlist]);
 
   const addProduct = (product) => {
