@@ -7,6 +7,7 @@ import {
   FaPhoneAlt,
   FaMapMarkerAlt,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -20,62 +21,58 @@ const Footer = () => {
           </p>
         </div>
 
+        {/* Quick Links */}
         <div>
           <h3 className="text-lg font-semibold text-white mb-3">Quick Links</h3>
           <ul className="space-y-2 text-sm">
             <li>
-              <a href="/" className="hover:text-blue-600">
+              <Link to="/" className="hover:text-blue-600">
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/about" className="hover:text-blue-600">
+              <Link to="/about" className="hover:text-blue-600">
                 About
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/contact" className="hover:text-blue-600">
+              <Link to="/contact" className="hover:text-blue-600">
                 Contact
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/adminDashboard" className="hover:text-blue-600">
+              <Link to="/adminDashboard" className="hover:text-blue-600">
                 Dashboard
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
 
-        {/* Policies */}
+        {/* Customer Service */}
         <div>
           <h3 className="text-lg font-semibold text-white mb-3">
             Customer Service
           </h3>
           <ul className="space-y-2 text-sm">
             <li>
-              <a href="/returns" className="hover:text-blue-600">
-                Return Policy
-              </a>
-            </li>
-            <li>
-              <a href="/privacy" className="hover:text-blue-600">
+              <Link to="/privacy" className="hover:text-blue-600">
                 Privacy Policy
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/terms" className="hover:text-blue-600">
+              <Link to="/terms" className="hover:text-blue-600">
                 Terms & Conditions
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/support" className="hover:text-blue-600">
+              <Link to="/support" className="hover:text-blue-600">
                 Help & Support
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
 
-        {/* Contact + Social */}
+        {/* Contact Info + Social Icons */}
         <div>
           <h3 className="text-lg font-semibold text-white mb-3">Contact Us</h3>
           <ul className="space-y-2 text-sm mb-4">
